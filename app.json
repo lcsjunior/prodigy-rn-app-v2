@@ -5,7 +5,7 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,6 +21,7 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.prodigyio.app",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
@@ -28,6 +29,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
-  }
+    },
+    "sdkVersion": "47.0.0"
+  },
+  "name": "prodigy-rn-app-v2"
 }
