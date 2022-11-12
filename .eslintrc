@@ -15,6 +15,9 @@
     "sourceType": "module"
   },
   "plugins": ["react", "react-hooks"],
+  "globals": {
+    "__DEV__": true
+  },
   "rules": {
     "react/react-in-jsx-scope": "off"
   }
