@@ -4,8 +4,10 @@ import { useAuth } from '../../hooks';
 import {
   ChannelListScreen,
   ChannelScreen,
+  DashboardScreen,
   SettingsScreen,
   SignInScreen,
+  WidgetScreen,
 } from '../../screens';
 
 const Stack = createStackNavigator();
@@ -32,6 +34,16 @@ function RootNavigator() {
             name="ChannelDetail"
             component={ChannelScreen}
             options={{ title: 'Channel' }}
+          />
+          <Stack.Screen
+            name="Dashboard"
+            component={DashboardScreen}
+            options={{ title: 'Channel' }}
+          />
+          <Stack.Screen
+            name="WidgetDetail"
+            component={WidgetScreen}
+            options={{ title: 'Widget' }}
           />
           <Stack.Screen
             name="Settings"
