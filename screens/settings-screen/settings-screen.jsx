@@ -1,8 +1,8 @@
-import { Button, ScreenWrapper } from '@components';
-import { useAuth, useGlobal } from '@hooks';
 import { StyleSheet } from 'react-native';
 import { Avatar, List } from 'react-native-paper';
 import sleep from 'sleep-promise';
+import { Button, ScreenWrapper } from '../../components';
+import { useAuth, useGlobal } from '../../hooks';
 
 function SettingsScreen() {
   const { confirm, progress } = useGlobal();

@@ -3,7 +3,7 @@ export * from './use-channel';
 export * from './use-channels';
 export * from './use-dashboard';
 export * from './use-deferred-promise';
-export * from './use-disclosure';
+export * from './use-disclose';
 export * from './use-fast-form';
 export * from './use-global';
 export * from './use-preferences';

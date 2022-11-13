@@ -1,6 +1,6 @@
-import { baseApi } from '@libs';
-import { messages } from '@utils';
 import { useEffect, useState } from 'react';
+import { baseApi } from '../../libs';
+import { messages } from '../../utils';
 import { AuthContext } from './auth-context';
 
 const getUserSession = () => baseApi.get('/auth/user');

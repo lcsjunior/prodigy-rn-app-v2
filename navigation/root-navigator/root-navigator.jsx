@@ -1,7 +1,7 @@
-import { LogoTitle } from '@components';
-import { useAuth } from '@hooks';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ChannelListScreen, SettingsScreen, SignInScreen } from '@screens';
+import { LogoTitle } from '../../components';
+import { useAuth } from '../../hooks';
+import { ChannelListScreen, SettingsScreen, SignInScreen } from '../../screens';
 
 const Stack = createStackNavigator();
 

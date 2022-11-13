@@ -7,13 +7,13 @@ import { StatusBar } from 'expo-status-bar';
 import { Provider as PaperProvider } from 'react-native-paper';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { AuthProvider, GlobalProvider, PreferencesProvider } from '@contexts';
-import { useAuth, usePreferences } from '@hooks';
 import { NavigationContainer } from '@react-navigation/native';
 import { useCallback, useEffect, useState } from 'react';
-import { RootNavigator } from '@navigation';
-import { fonts } from '@core';
 import { LogBox } from 'react-native';
+import { useAuth, usePreferences } from './hooks';
+import { fonts } from './core';
+import { AuthProvider, GlobalProvider, PreferencesProvider } from './contexts';
+import { RootNavigator } from './navigation';
 
 LogBox.ignoreLogs([
   'Require cycles are allowed, but can result in uninitialized values.',

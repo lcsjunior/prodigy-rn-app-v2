@@ -1,10 +1,10 @@
+import { useRef } from 'react';
 import {
   AlertDialog,
   ConfirmationDialog,
   ProgressDialog,
   Snackbar,
-} from '@components';
-import { useRef } from 'react';
+} from '../../components';
 import { GlobalContext } from './global-context';
 
 function GlobalProvider({ children }) {

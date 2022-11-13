@@ -1,8 +1,7 @@
-import { Button, Link, ScreenWrapper, Text, TextInput } from '@components';
-import { useAuth, useFastForm, useGlobal } from '@hooks';
-import { messages } from '@utils';
 import { Keyboard, StyleSheet, View } from 'react-native';
-import stringHelpers from 'utils/string-helpers';
+import { Button, Link, ScreenWrapper, Text, TextInput } from '../../components';
+import { useAuth, useFastForm, useGlobal } from '../../hooks';
+import { messages, stringHelpers } from '../../utils';
 
 function SignInScreen() {
   const { onLogin } = useAuth();

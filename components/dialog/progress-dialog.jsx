@@ -1,4 +1,3 @@
-import { useDisclose } from '@hooks';
 import { forwardRef, useImperativeHandle } from 'react';
 import { StyleSheet, View } from 'react-native';
 import {
@@ -8,6 +7,7 @@ import {
   Portal,
 } from 'react-native-paper';
 import sleep from 'sleep-promise';
+import { useDisclose } from '../../hooks';
 
 const ProgressDialog = forwardRef((props, ref) => {
   const { isOpen, onOpen, onClose } = useDisclose(false);

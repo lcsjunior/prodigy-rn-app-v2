@@ -1,6 +1,6 @@
-import { useDeferredPromise, useDisclose } from '@hooks';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
+import { useDeferredPromise, useDisclose } from '../../hooks';
 
 const ConfirmationDialog = forwardRef((props, ref) => {
   const { isOpen, onOpen, onClose } = useDisclose(false);

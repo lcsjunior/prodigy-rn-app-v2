@@ -1,19 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true,
-    "baseUrl": "./",
-    "paths": {
-      "@assets": ["./assets"],
-      "@components": ["./components"],
-      "@contexts": ["./contexts"],
-      "@core": ["./core"],
-      "@libs": ["./libs"],
-      "@navigation": ["./navigation"],
-      "@screens": ["./screens"],
-      "@hooks": ["./hooks"],
-      "@utils": ["./utils"]
-    }
+    "strict": true
   },
   "exclude": ["node_modules"]
 }

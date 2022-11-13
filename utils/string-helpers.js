@@ -5,4 +5,4 @@ const stringHelpers = {
   isBlank,
 };
 
-export default stringHelpers;
+export { stringHelpers };

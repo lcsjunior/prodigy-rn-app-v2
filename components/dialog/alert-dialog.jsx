@@ -1,6 +1,6 @@
-import { useDisclose } from '@hooks';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
+import { useDisclose } from '../../hooks';
 
 const AlertDialog = forwardRef((props, ref) => {
   const { isOpen, onOpen, onClose } = useDisclose(false);

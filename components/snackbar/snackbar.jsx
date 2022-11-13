@@ -1,6 +1,6 @@
-import { useDisclose } from '@hooks';
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Snackbar as NPSnackbar, useTheme } from 'react-native-paper';
+import { useDisclose } from '../../hooks';
 
 const Snackbar = forwardRef((props, ref) => {
   const theme = useTheme();

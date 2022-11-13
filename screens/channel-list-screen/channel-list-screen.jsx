@@ -1,6 +1,7 @@
-import { useDisclose } from '@hooks';
 import { useEffect } from 'react';
 import { IconButton, Menu } from 'react-native-paper';
+import { ScreenWrapper } from '../../components';
+import { useDisclose } from '../../hooks';
 
 function ChannelListScreen({ navigation }) {
   const {
@@ -35,7 +36,7 @@ function ChannelListScreen({ navigation }) {
     });
   }, [navigation, isMenuOpen, onMenuClose, onMenuToggle]);
 
-  return null;
+  return <ScreenWrapper withScrollView={false}></ScreenWrapper>;
 }
 
 export { ChannelListScreen };
