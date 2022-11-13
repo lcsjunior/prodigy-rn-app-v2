@@ -1,0 +1,3 @@
+const useChannel = () => {};
+
+export { useChannel };

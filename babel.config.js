@@ -12,6 +12,7 @@ module.exports = function (api) {
       [
         'module-resolver',
         {
+          root: ['.'],
           alias: {
             '@assets': './assets',
             '@components': './components',
@@ -23,7 +24,6 @@ module.exports = function (api) {
             '@hooks': './hooks',
             '@utils': './utils',
           },
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       ],
     ],

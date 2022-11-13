@@ -1,0 +1,3 @@
+const useDashboard = () => {};
+
+export { useDashboard };

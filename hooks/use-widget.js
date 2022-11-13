@@ -1,0 +1,3 @@
+const useWidget = () => {};
+
+export { useWidget };
