@@ -1,5 +1,7 @@
+import { ScreenWrapper } from '@components';
+
 function WidgetScreen() {
-  return null;
+  return <ScreenWrapper></ScreenWrapper>;
 }
 
 export { WidgetScreen };

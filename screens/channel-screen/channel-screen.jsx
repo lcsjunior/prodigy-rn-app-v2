@@ -1,5 +1,7 @@
+import { ScreenWrapper } from '@components';
+
 function ChannelScreen() {
-  return null;
+  return <ScreenWrapper></ScreenWrapper>;
 }
 
 export { ChannelScreen };

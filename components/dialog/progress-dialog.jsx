@@ -7,12 +7,18 @@ import {
   Paragraph,
   Portal,
 } from 'react-native-paper';
+import sleep from 'sleep-promise';
 
 const ProgressDialog = forwardRef((props, ref) => {
   const { isOpen, onOpen, onClose } = useDisclose(false);
 
+  const show = async () => {
+    await sleep(200);
+    onOpen();
+  };
+
   useImperativeHandle(ref, () => ({
-    show: onOpen,
+    show,
     hide: onClose,
   }));
 

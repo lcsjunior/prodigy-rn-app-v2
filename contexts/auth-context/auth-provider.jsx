@@ -7,7 +7,7 @@ const getUserSession = () => baseApi.get('/auth/user');
 
 const login = (data) => baseApi.post('/auth/login', data);
 
-const logout = (data) => baseApi.post('/auth/login', data);
+const logout = (data) => baseApi.post('/auth/logout', data);
 
 function AuthProvider({ children }) {
   const [isValidating, setIsValidating] = useState(true);
@@ -50,7 +50,7 @@ function AuthProvider({ children }) {
       value={{
         isValidating,
         isSignedIn,
-        user: session,
+        session,
         onLogin,
         onLogout,
       }}

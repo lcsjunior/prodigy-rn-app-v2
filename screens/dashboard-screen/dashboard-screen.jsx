@@ -1,5 +1,7 @@
+import { ScreenWrapper } from '@components';
+
 function DashboardScreen() {
-  return null;
+  return <ScreenWrapper></ScreenWrapper>;
 }
 
 export { DashboardScreen };
