@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
 import { IconButton, Menu } from 'react-native-paper';
-import { ScreenWrapper, Text } from '../../components';
-import { useDisclose } from '../../hooks';
+import { ScreenActivityIndicator, ScreenWrapper } from '../../components';
+import { useDashboard, useDisclose } from '../../hooks';
+import { DashboardList } from './dashboard-list';
 
 function DashboardScreen({ navigation, route }) {
   const {
@@ -10,51 +10,55 @@ function DashboardScreen({ navigation, route }) {
     onClose: onMenuClose,
     onToggle: onMenuToggle,
   } = useDisclose();
+  const { isLoading, channel, widgets } = useDashboard(route.params?.id);
+  const title = channel?.data?.name || '';
+
+  const handleDragEnd = ({ data }) => console.log(data);
 
   useEffect(() => {
     navigation.setOptions({
-      title: 'Hello',
+      title: title,
       headerRight: () => {
         return (
-          <View style={styles.headerRight}>
-            <Menu
-              visible={isMenuOpen}
-              onDismiss={onMenuClose}
-              anchor={
-                <IconButton
-                  icon={global.MORE_ICON}
-                  size={24}
-                  onPress={onMenuToggle}
-                />
-              }
-            >
-              <Menu.Item
-                title="Edit Channel"
-                onPress={() => {
-                  navigation.navigate('ChannelDetail', {
-                    id: route.params?.id,
-                  });
-                  onMenuClose();
-                }}
+          <Menu
+            visible={isMenuOpen}
+            onDismiss={onMenuClose}
+            anchor={
+              <IconButton
+                icon={global.MORE_ICON}
+                size={24}
+                onPress={onMenuToggle}
               />
-            </Menu>
-          </View>
+            }
+          >
+            <Menu.Item
+              title="Channel Settings"
+              onPress={() => {
+                navigation.navigate('ChannelDetail', {
+                  id: route.params?.id,
+                });
+                onMenuClose();
+              }}
+            />
+          </Menu>
         );
       },
     });
-  }, [navigation, route, isMenuOpen, onMenuClose, onMenuToggle]);
+  }, [navigation, route, isMenuOpen, onMenuClose, onMenuToggle, title]);
+
+  if (isLoading) {
+    return <ScreenActivityIndicator />;
+  }
 
   return (
-    <ScreenWrapper>
-      <Text>{route.params?.id}</Text>
+    <ScreenWrapper withScrollView={false}>
+      <DashboardList
+        channel={channel}
+        widgets={widgets}
+        onDragEnd={handleDragEnd}
+      />
     </ScreenWrapper>
   );
 }
-
-const styles = StyleSheet.create({
-  headerRight: {
-    flexDirection: 'row',
-  },
-});
 
 export { DashboardScreen };

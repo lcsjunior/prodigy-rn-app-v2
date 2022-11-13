@@ -46,7 +46,7 @@ function ChannelListScreen({ navigation }) {
   }
 
   return (
-    <ScreenWrapper withScrollView={false} style={styles.container}>
+    <ScreenWrapper withScrollView={false}>
       <ChannelList channels={channels} onDragEnd={handleDragEnd} />
       <FAB
         icon="plus"

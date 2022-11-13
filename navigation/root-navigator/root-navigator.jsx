@@ -16,7 +16,13 @@ function RootNavigator() {
   const { isSignedIn } = useAuth();
 
   return (
-    <Stack.Navigator screenOptions={{}}>
+    <Stack.Navigator
+      screenOptions={{
+        headerTitleStyle: {
+          fontFamily: 'Roboto_400Regular',
+        },
+      }}
+    >
       {isSignedIn ? (
         <Stack.Group>
           <Stack.Screen
