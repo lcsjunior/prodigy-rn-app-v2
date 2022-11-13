@@ -10,7 +10,7 @@ function SimpleList({ data, contentContainerStyle }) {
             {group.title}
           </Text>
           {group.data.map((item, index) => (
-            <Text style={styles.item} key={index} alpha={0.8} fontSize={12}>
+            <Text style={styles.item} key={index} alpha={0.75} fontSize={14}>
               {item}
             </Text>
           ))}

@@ -100,6 +100,21 @@ function ChannelScreen({ navigation, route }) {
     progress.hide();
   };
 
+  const channelData = channel?.data
+    ? [
+        {
+          title: 'Description',
+          data: [channel?.data.description || channel?.data.name],
+        },
+        {
+          title: 'Fields',
+          data: getArrayOfFields(channel?.data).map(
+            (field) => `${field.id} - ${field.value}`
+          ),
+        },
+      ]
+    : null;
+
   return (
     <ScreenWrapper withScrollView={false}>
       <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -131,22 +146,7 @@ function ChannelScreen({ navigation, route }) {
           onFocus={handleInputFocus('writeApiKey')}
           error={errors.writeApiKey}
         />
-        {channel?.data && (
-          <SimpleList
-            data={[
-              {
-                title: 'Description',
-                data: [channel?.data.description],
-              },
-              {
-                title: 'Fields',
-                data: getArrayOfFields(channel?.data).map(
-                  (field) => `${field.id} - ${field.value}`
-                ),
-              },
-            ]}
-          />
-        )}
+        {channel?.data && <SimpleList data={channelData} />}
       </ScrollView>
       <DockedFormFooter
         isDiscardVisible={isNew}
