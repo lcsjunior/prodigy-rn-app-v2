@@ -1,5 +1,5 @@
-import { themes } from '@core';
 import { useState } from 'react';
+import { themes } from '../../core';
 import { PreferencesContext } from './preferences-context';
 
 function PreferencesProvider({ children }) {

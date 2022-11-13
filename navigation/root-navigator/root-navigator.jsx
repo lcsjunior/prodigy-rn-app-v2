@@ -1,7 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { LogoTitle } from '../../components';
 import { useAuth } from '../../hooks';
-import { ChannelListScreen, SettingsScreen, SignInScreen } from '../../screens';
+import {
+  ChannelListScreen,
+  ChannelScreen,
+  SettingsScreen,
+  SignInScreen,
+} from '../../screens';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +27,11 @@ function RootNavigator() {
             options={{
               headerTitle: (props) => <LogoTitle {...props} />,
             }}
+          />
+          <Stack.Screen
+            name="ChannelDetail"
+            component={ChannelScreen}
+            options={{ title: 'Channel' }}
           />
           <Stack.Screen
             name="Settings"
