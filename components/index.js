@@ -5,6 +5,7 @@ export * from './logo-title';
 export * from './screen-activity-indicator';
 export * from './screen-error';
 export * from './screen-wrapper';
+export * from './simple-list';
 export * from './snackbar';
 export * from './text-input';
 export * from './text';

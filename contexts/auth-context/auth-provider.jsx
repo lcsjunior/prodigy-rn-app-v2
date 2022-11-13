@@ -3,7 +3,7 @@ import { baseApi } from '../../libs';
 import { messages } from '../../utils';
 import { AuthContext } from './auth-context';
 
-const getUserSession = () => baseApi.get('/auth/user');
+const getSession = () => baseApi.get('/auth/user');
 
 const login = (data) => baseApi.post('/auth/login', data);
 
@@ -17,7 +17,7 @@ function AuthProvider({ children }) {
   useEffect(() => {
     async function validateSession() {
       try {
-        const { data } = await getUserSession();
+        const { data } = await getSession();
         setSession(data);
         setIsSignedIn(true);
       } catch (err) {
@@ -31,7 +31,7 @@ function AuthProvider({ children }) {
   const onLogin = async (username, password) => {
     try {
       await login({ username, password });
-      const { data } = await getUserSession();
+      const { data } = await getSession();
       setSession(data);
       setIsSignedIn(true);
     } catch (err) {

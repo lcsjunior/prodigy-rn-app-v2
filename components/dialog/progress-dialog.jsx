@@ -17,9 +17,13 @@ const ProgressDialog = forwardRef((props, ref) => {
     onOpen();
   };
 
+  const hide = () => {
+    onClose();
+  };
+
   useImperativeHandle(ref, () => ({
     show,
-    hide: onClose,
+    hide,
   }));
 
   return (

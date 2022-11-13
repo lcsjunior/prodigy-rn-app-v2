@@ -1,5 +1,6 @@
 import { forwardRef, useImperativeHandle, useState } from 'react';
 import { Button, Dialog, Paragraph, Portal } from 'react-native-paper';
+import sleep from 'sleep-promise';
 import { useDisclose } from '../../hooks';
 
 const AlertDialog = forwardRef((props, ref) => {
@@ -7,9 +8,10 @@ const AlertDialog = forwardRef((props, ref) => {
   const [title, setTitle] = useState(null);
   const [message, setMessage] = useState(null);
 
-  const alert = (options) => {
+  const alert = async (options) => {
     setTitle(options?.title || 'Alert');
     setMessage(options?.message);
+    await sleep(200);
     onOpen();
   };
 

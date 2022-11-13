@@ -8,13 +8,13 @@ const listChannels = () => baseApi.get('/channels');
 const bulkChannelUpdate = (data) => baseApi.patch('/channels/bulk', data);
 
 const useChannels = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [channels, setChannels] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
-      setIsLoading(true);
       async function fetchChannels() {
+        setIsLoading(true);
         try {
           const { data } = await listChannels();
           setChannels(data);

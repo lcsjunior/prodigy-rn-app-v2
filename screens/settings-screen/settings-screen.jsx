@@ -17,7 +17,7 @@ function SettingsScreen() {
         message: 'Are you sure you want to sign out?',
       });
       if (confirmed) {
-        progress.show();
+        await progress.show();
         await sleep(1000);
         await onLogout();
       }

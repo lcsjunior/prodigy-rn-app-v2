@@ -21,7 +21,7 @@ function ChannelItem({ _id, channelId, data, drag }) {
         }
         onLongPress={drag}
       >
-        <Card style={styles.card}>
+        <Card style={styles.gap}>
           <Card.Content>
             <View style={styles.titleWrapper}>
               {data ? (
@@ -46,7 +46,7 @@ function ChannelItem({ _id, channelId, data, drag }) {
               Channel ID: {channelId}
             </Text>
             {data?.description && (
-              <Text fontSize={12} alpha={0.8} numberOfLines={3}>
+              <Text fontSize={10} alpha={0.8} numberOfLines={3}>
                 {data?.description}
               </Text>
             )}
@@ -59,9 +59,8 @@ function ChannelItem({ _id, channelId, data, drag }) {
 const WrappedChannelItem = memo(ChannelItem);
 
 const styles = StyleSheet.create({
-  card: {
-    marginVertical: 3,
-    marginHorizontal: 6,
+  gap: {
+    marginVertical: 2.5,
   },
   titleWrapper: {
     flex: 1,

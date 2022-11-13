@@ -15,6 +15,7 @@ function ChannelList({ channels, onDragEnd }) {
       renderItem={renderItem}
       ListEmptyComponent={ListEmptyComponent}
       onDragEnd={onDragEnd}
+      contentContainerStyle={styles.contentContainer}
     />
   );
 }
@@ -28,6 +29,10 @@ function ListEmptyComponent() {
 }
 
 const styles = StyleSheet.create({
+  contentContainer: {
+    paddingVertical: 6,
+    paddingHorizontal: 5,
+  },
   listEmptyContainer: {
     flex: 1,
     alignItems: 'center',
