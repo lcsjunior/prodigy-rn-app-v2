@@ -8,7 +8,7 @@ const readDashboard = (id) => baseApi.get(`/channels/${id}/dashboard`);
 const listWidgets = (chId) => baseApi.get('/widgets', { params: { chId } });
 
 const useDashboard = (id) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [channel, setChannel] = useState(null);
   const [widgets, setWidgets] = useState([]);
 

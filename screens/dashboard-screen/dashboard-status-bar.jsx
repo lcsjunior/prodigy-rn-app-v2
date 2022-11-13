@@ -22,10 +22,10 @@ function DashboardStatusBar({ channel }) {
         styles.container,
       ]}
     >
-      <Text fontSize={11}>{`Last entry: ${
+      <Text fontSize={11} alpha={0.75}>{`Last entry: ${
         lastUpdated ? formatDistanceToNowStrict(lastUpdated) : null
       }`}</Text>
-      <Text fontSize={11}>{`Entries: ${lastEntryId}`}</Text>
+      <Text fontSize={11} alpha={0.75}>{`Entries: ${lastEntryId}`}</Text>
     </View>
   );
 }

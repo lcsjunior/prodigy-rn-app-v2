@@ -12,9 +12,9 @@ const updateChannel = (id, data) => baseApi.patch(`/channels/${id}`, data);
 const deleteChannel = (id) => baseApi.delete(`/channels/${id}`);
 
 const useChannel = (id) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [channel, setChannel] = useState(null);
   const isNew = !id;
+  const [isLoading, setIsLoading] = useState(!isNew);
+  const [channel, setChannel] = useState(null);
 
   const create = async (data) => {
     const { data: newChannel } = await createChannel(data);
