@@ -3,10 +3,10 @@ import { useEffect } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import {
+  DefinitionList,
   DockedFormFooter,
   ScreenActivityIndicator,
   ScreenWrapper,
-  SimpleList,
   TextInput,
 } from '../../components';
 import { useChannel, useFastForm, useGlobal } from '../../hooks';
@@ -100,17 +100,23 @@ function ChannelScreen({ navigation, route }) {
     progress.hide();
   };
 
-  const channelData = channel?.data
+  const channelDetails = channel?.data
     ? [
+        ...getArrayOfFields(channel?.data).map((field) => ({
+          label: `Field ${field.id}`,
+          value: field.value,
+        })),
         {
-          title: 'Description',
-          data: [channel?.data.description || channel?.data.name],
+          label: 'Latitude',
+          value: channel?.data.latitude,
         },
         {
-          title: 'Fields',
-          data: getArrayOfFields(channel?.data).map(
-            (field) => `${field.id} - ${field.value}`
-          ),
+          label: 'Longitude',
+          value: channel?.data.longitude,
+        },
+        {
+          label: 'Elevation',
+          value: channel?.data.elevation,
         },
       ]
     : null;
@@ -146,7 +152,12 @@ function ChannelScreen({ navigation, route }) {
           onFocus={handleInputFocus('writeApiKey')}
           error={errors.writeApiKey}
         />
-        {channel?.data && <SimpleList data={channelData} />}
+        {channel?.data && (
+          <DefinitionList
+            headTitle={channel?.data.description || channel?.data.name}
+            data={channelDetails}
+          />
+        )}
       </ScrollView>
       <DockedFormFooter
         isDiscardVisible={isNew}
