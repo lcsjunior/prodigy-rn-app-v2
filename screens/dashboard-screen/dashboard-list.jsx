@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import DraggableFlatList from 'react-native-draggable-flatlist';
 import { Text, Widget } from '../../components';
+import { DashboardStatusBar } from './dashboard-status-bar';
 
 function DashboardList({ channel, widgets, onDragEnd }) {
   const renderItem = ({ item: widget, drag, isActive }) => {
@@ -15,6 +16,10 @@ function DashboardList({ channel, widgets, onDragEnd }) {
       keyExtractor={(item) => item._id.toString()}
       renderItem={renderItem}
       ListEmptyComponent={ListEmptyComponent}
+      ListHeaderComponent={
+        widgets.length > 0 && <DashboardStatusBar channel={channel} />
+      }
+      stickyHeaderIndices={[0]}
       onDragEnd={onDragEnd}
       contentContainerStyle={styles.contentContainer}
     />
