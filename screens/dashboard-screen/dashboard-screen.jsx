@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { IconButton, Menu } from 'react-native-paper';
-import { ScreenWrapper } from '../../components';
+import { ScreenWrapper, Text } from '../../components';
 import { useDisclose } from '../../hooks';
 
-function DashboardScreen({ navigation }) {
+function DashboardScreen({ navigation, route }) {
   const {
     isOpen: isMenuOpen,
     onClose: onMenuClose,
@@ -32,7 +32,7 @@ function DashboardScreen({ navigation }) {
                 title="Edit Channel"
                 onPress={() => {
                   navigation.navigate('ChannelDetail', {
-                    id: -1,
+                    id: route.params?.id,
                   });
                   onMenuClose();
                 }}
@@ -42,9 +42,13 @@ function DashboardScreen({ navigation }) {
         );
       },
     });
-  }, [navigation, isMenuOpen, onMenuClose, onMenuToggle]);
+  }, [navigation, route, isMenuOpen, onMenuClose, onMenuToggle]);
 
-  return <ScreenWrapper></ScreenWrapper>;
+  return (
+    <ScreenWrapper>
+      <Text>{route.params?.id}</Text>
+    </ScreenWrapper>
+  );
 }
 
 const styles = StyleSheet.create({
