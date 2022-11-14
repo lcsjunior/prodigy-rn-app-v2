@@ -17,7 +17,7 @@ import { RootNavigator } from './navigation';
 
 LogBox.ignoreLogs([
   'Require cycles are allowed, but can result in uninitialized values.',
-  'Invalid prop textStyle of type array supplied to Cell',
+  'Require cycle: node_modules/victory',
 ]);
 
 SplashScreen.preventAutoHideAsync();
