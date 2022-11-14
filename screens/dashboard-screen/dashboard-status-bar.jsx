@@ -1,17 +1,21 @@
-import { formatDistanceToNowStrict, parseISO } from 'date-fns';
+import { addSeconds, formatDistance, parseISO } from 'date-fns';
 import { StyleSheet, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import { useStopwatch } from 'react-timer-hook';
+
 import { Text } from '../../components';
 
 function DashboardStatusBar({ channel }) {
   const { colors } = useTheme();
-  const lastEntryId = channel?.lastEntry.entry_id || '';
+  const { seconds } = useStopwatch({ autoStart: true });
+  const lastEntryId = channel?.lastEntry.entry_id || null;
+  const lastUpdated = lastEntryId
+    ? parseISO(channel?.lastEntry.created_at)
+    : null;
 
   if (!lastEntryId) {
     return null;
   }
-
-  const lastUpdated = parseISO(channel?.lastEntry.created_at);
 
   return (
     <View
@@ -22,17 +26,23 @@ function DashboardStatusBar({ channel }) {
         styles.container,
       ]}
     >
-      <Text fontSize={11} alpha={0.75}>{`Last entry: ${
-        lastUpdated ? formatDistanceToNowStrict(lastUpdated) : null
-      }`}</Text>
-      <Text fontSize={11} alpha={0.75}>{`Entries: ${lastEntryId}`}</Text>
+      <View style={styles.row}>
+        <Text fontSize={11} alpha={0.75}>{`Last entry: ${
+          lastUpdated
+            ? formatDistance(lastUpdated, addSeconds(new Date(), seconds))
+            : null
+        }`}</Text>
+        <Text fontSize={11} alpha={0.75}>{`Entries: ${lastEntryId}`}</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 1,
+    paddingVertical: 2,
+  },
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },

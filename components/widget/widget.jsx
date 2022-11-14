@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 import { Card } from 'react-native-paper';
 import { Text } from '../text';
 
-function Widget({ _id }) {
+function Widget({ channel }) {
   return (
     <Card style={styles.gap}>
-      <Text>{_id}</Text>
+      <Text>{channel?.feeds.length}</Text>
     </Card>
   );
 }

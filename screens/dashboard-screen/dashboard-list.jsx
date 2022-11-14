@@ -6,7 +6,7 @@ import { DashboardStatusBar } from './dashboard-status-bar';
 function DashboardList({ channel, widgets, onDragEnd }) {
   const renderItem = ({ item: widget, drag, isActive }) => {
     return (
-      <Widget channel={channel} {...widget} drag={drag} isActive={isActive} />
+      <Widget {...widget} channel={channel} drag={drag} isActive={isActive} />
     );
   };
 
