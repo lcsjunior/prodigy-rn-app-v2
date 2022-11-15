@@ -159,7 +159,7 @@ function WidgetScreen({ navigation, route }) {
             onFocus={handleInputFocus('unit')}
           />
         )}
-        {['display', 'time-series'].includes(selectedType.slug) && (
+        {['display', 'time-series', 'float'].includes(selectedType.slug) && (
           <TextInput
             mode="outlined"
             label="Decimal places"

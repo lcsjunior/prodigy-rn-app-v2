@@ -1,9 +1,12 @@
 import { StyleSheet, View } from 'react-native';
+import _ from 'lodash';
 import { Text } from '../text';
 
 function DisplayWidget({ channel, field, unit, decimalPlaces }) {
   const rawValue = channel?.lastEntry[field.key];
-  const value = rawValue ? rawValue.toFixed(decimalPlaces || 1) : null;
+  const value = _.isNumber(rawValue)
+    ? rawValue.toFixed(decimalPlaces ?? 1)
+    : null;
 
   return (
     <View style={styles.container}>
