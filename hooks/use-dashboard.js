@@ -10,6 +10,8 @@ import { prepareEntryData } from '../utils/channel-helpers';
 
 const readDashboard = (id) => baseApi.get(`/channels/${id}/dashboard`);
 
+const listWidgetTypes = () => baseApi.get('/widgets/types');
+
 const listWidgets = (chId) => baseApi.get('/widgets', { params: { chId } });
 
 const bulkWidgetUpdate = (chId, data) =>
@@ -60,6 +62,7 @@ const useDashboard = (id) => {
   const [isLoading, setIsLoading] = useState(true);
   const [channel, setChannel] = useState(null);
   const [widgets, setWidgets] = useState([]);
+  const [widgetTypes, setWidgetTypes] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -70,9 +73,11 @@ const useDashboard = (id) => {
           const results = await Promise.all([
             readDashboard(id),
             listWidgets(id),
+            listWidgetTypes(),
           ]);
           es = subscribe(results[0].data, setChannel);
           setWidgets(results[1].data);
+          setWidgetTypes(results[2].data);
         } catch (err) {
           console.error(messages.failedToFetch);
         }
@@ -101,6 +106,7 @@ const useDashboard = (id) => {
     isLoading,
     channel,
     widgets,
+    widgetTypes,
     bulkUpdate,
   };
 };

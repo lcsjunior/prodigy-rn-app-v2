@@ -1,4 +1,5 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { useNavigation } from '@react-navigation/native';
 import { memo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { ScaleDecorator } from 'react-native-draggable-flatlist';
@@ -6,13 +7,15 @@ import { Card, IconButton } from 'react-native-paper';
 import { DisplayWidget } from './display-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
-function Widget({ type, drag, ...rest }) {
-  function WidgetExt() {
+function Widget({ channel, _id, type, drag, ...rest }) {
+  const navigation = useNavigation();
+
+  function WidgetExt(props) {
     switch (type.slug) {
       case 'time-series':
-        return <TimeSeriesWidget {...rest} />;
+        return <TimeSeriesWidget {...props} />;
       case 'display':
-        return <DisplayWidget {...rest} />;
+        return <DisplayWidget {...props} />;
       default:
         console.log(`Sorry, we are out of ${type.name}.`);
     }
@@ -23,13 +26,19 @@ function Widget({ type, drag, ...rest }) {
       <View style={styles.container}>
         <TouchableWithoutFeedback onLongPress={drag}>
           <Card style={styles.gap}>
-            <WidgetExt />
+            <WidgetExt channel={channel} {...rest} />
           </Card>
         </TouchableWithoutFeedback>
         <IconButton
           icon={(props) => <Ionicons name="ios-settings-outline" {...props} />}
           size={14}
-          onPress={() => console.log('Pressed')}
+          onPress={() =>
+            navigation.navigate('WidgetDetail', {
+              chId: channel._id,
+              typeId: type._id,
+              id: _id,
+            })
+          }
           style={{
             position: 'absolute',
             right: 0,

@@ -36,17 +36,17 @@ function RootNavigator() {
           <Stack.Screen
             name="ChannelDetail"
             component={ChannelScreen}
-            options={{ title: 'Channel' }}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name="Dashboard"
             component={DashboardScreen}
-            options={{ title: 'Channel' }}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name="WidgetDetail"
             component={WidgetScreen}
-            options={{ title: 'Widget' }}
+            options={{ title: '' }}
           />
           <Stack.Screen
             name="Settings"

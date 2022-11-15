@@ -1,9 +1,13 @@
-import { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { IconButton, Menu } from 'react-native-paper';
-import { ScreenActivityIndicator, ScreenWrapper } from '../../components';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { IconButton, Menu, useTheme } from 'react-native-paper';
+import { ScreenActivityIndicator, ScreenWrapper, Text } from '../../components';
 import { useDashboard, useDisclose } from '../../hooks';
 import { DashboardList } from './dashboard-list';
+import BottomSheet, {
+  BottomSheetFlatList,
+  BottomSheetBackdrop,
+} from '@gorhom/bottom-sheet';
 
 function DashboardScreen({ navigation, route }) {
   const {
@@ -11,12 +15,48 @@ function DashboardScreen({ navigation, route }) {
     onClose: onMenuClose,
     onToggle: onMenuToggle,
   } = useDisclose();
-  const { isLoading, channel, widgets, bulkUpdate } = useDashboard(
+  const { colors } = useTheme();
+  const { isLoading, channel, widgets, widgetTypes, bulkUpdate } = useDashboard(
     route.params?.id
   );
   const title = channel?.data?.name || '';
 
   const handleDragEnd = ({ data }) => bulkUpdate(data);
+
+  const sheetRef = useRef(null);
+  const snapPoints = useMemo(() => ['60%', '90%'], []);
+
+  const handleSnapPress = () => sheetRef.current?.snapToIndex(0);
+
+  const renderItem = useCallback(
+    ({ item: widgetType }) => (
+      <TouchableOpacity
+        style={styles.itemContainer}
+        onPress={() =>
+          navigation.navigate('WidgetDetail', {
+            chId: channel?._id,
+            typeId: widgetType._id,
+          })
+        }
+      >
+        <Text style={[{ color: colors.primary }]} family="medium">
+          {widgetType.name.toUpperCase()}
+        </Text>
+      </TouchableOpacity>
+    ),
+    [navigation, colors.primary, channel?._id]
+  );
+
+  const renderBackdrop = useCallback(
+    (props) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+      />
+    ),
+    []
+  );
 
   useEffect(() => {
     navigation.setOptions({
@@ -29,11 +69,7 @@ function DashboardScreen({ navigation, route }) {
         return (
           channel?._id && (
             <View style={styles.headerRight}>
-              <IconButton
-                icon="plus"
-                size={24}
-                onPress={() => console.log('Pressed')}
-              />
+              <IconButton icon="plus" size={24} onPress={handleSnapPress} />
               <Menu
                 visible={isMenuOpen}
                 onDismiss={onMenuClose}
@@ -81,6 +117,26 @@ function DashboardScreen({ navigation, route }) {
         widgets={widgets}
         onDragEnd={handleDragEnd}
       />
+      <BottomSheet
+        ref={sheetRef}
+        enablePanDownToClose
+        snapPoints={snapPoints}
+        index={-1}
+        backdropComponent={renderBackdrop}
+        backgroundStyle={{
+          backgroundColor: colors.card,
+        }}
+        handleIndicatorStyle={{
+          backgroundColor: colors.onSurface,
+        }}
+      >
+        <BottomSheetFlatList
+          data={widgetTypes}
+          keyExtractor={(i) => i._id}
+          renderItem={renderItem}
+          contentContainerStyle={styles.contentContainer}
+        />
+      </BottomSheet>
     </ScreenWrapper>
   );
 }
@@ -88,6 +144,15 @@ function DashboardScreen({ navigation, route }) {
 const styles = StyleSheet.create({
   headerRight: {
     flexDirection: 'row',
+  },
+  itemContainer: {
+    padding: 10,
+    marginVertical: 2,
+    marginHorizontal: 6,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#2b2f38',
+    borderRadius: 4,
   },
 });
 

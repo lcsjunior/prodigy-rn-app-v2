@@ -1,7 +1,13 @@
-import { ScreenWrapper } from '../../components';
+import { ScreenWrapper, Text } from '../../components';
 
-function WidgetScreen() {
-  return <ScreenWrapper></ScreenWrapper>;
+function WidgetScreen({ route }) {
+  return (
+    <ScreenWrapper>
+      <Text>{route.params?.chId}</Text>
+      <Text>{route.params?.id}</Text>
+      <Text>{route.params?.typeId}</Text>
+    </ScreenWrapper>
+  );
 }
 
 export { WidgetScreen };

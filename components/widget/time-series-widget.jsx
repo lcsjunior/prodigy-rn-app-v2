@@ -9,15 +9,15 @@ import {
 import _ from 'lodash';
 import { presetColors } from '../../utils/preset-colors';
 import { useCallback } from 'react';
-import { subHours } from 'date-fns';
+// import { subHours } from 'date-fns';
 
 function TimeSeriesWidget({ channel, fields }) {
-  const zoomDomain = {
-    x: [
-      subHours(channel.lastEntry.created_at, 1),
-      channel.lastEntry.created_at,
-    ],
-  };
+  // const zoomDomain = {
+  //   x: [
+  //     subHours(channel.lastEntry.created_at, 1),
+  //     channel.lastEntry.created_at,
+  //   ],
+  // };
 
   const getData = useCallback(
     (key) => {
@@ -35,7 +35,10 @@ function TimeSeriesWidget({ channel, fields }) {
         height={260}
         scale={{ x: 'time', y: 'linear' }}
         containerComponent={
-          <VictoryZoomContainer zoomDimension="x" zoomDomain={zoomDomain} />
+          <VictoryZoomContainer
+            zoomDimension="x"
+            // zoomDomain={zoomDomain}
+          />
         }
       >
         <VictoryAxis
