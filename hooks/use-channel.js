@@ -22,7 +22,7 @@ const useChannel = (id) => {
   };
 
   const update = async (data) => {
-    const { data: currentChannel } = updateChannel(id, data);
+    const { data: currentChannel } = await updateChannel(id, data);
     return currentChannel;
   };
 

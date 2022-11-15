@@ -31,7 +31,7 @@ const useWidget = (chId, id) => {
   };
 
   const update = async (data) => {
-    const { data: currentWidget } = updateWidget(chId, id, data);
+    const { data: currentWidget } = await updateWidget(chId, id, data);
     return currentWidget;
   };
 

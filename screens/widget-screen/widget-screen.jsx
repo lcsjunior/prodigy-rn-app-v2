@@ -57,6 +57,7 @@ function WidgetScreen({ navigation, route }) {
         message: 'Channel field is required.',
       });
     } else {
+      progress.show();
       try {
         if (isNew) {
           await create(values);
@@ -66,6 +67,7 @@ function WidgetScreen({ navigation, route }) {
       } catch (err) {
         console.error(err.message);
       }
+      progress.hide();
       navigation.goBack();
     }
   };
@@ -110,7 +112,7 @@ function WidgetScreen({ navigation, route }) {
                 <RadioButton.Item
                   key={field.id}
                   label={`${field.id} - ${field.value}`}
-                  value={field.id}
+                  value={field.id.toString()}
                 />
               ))}
             </RadioButton.Group>
