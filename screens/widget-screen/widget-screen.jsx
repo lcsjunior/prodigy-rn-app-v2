@@ -170,33 +170,39 @@ function WidgetScreen({ navigation, route }) {
             onFocus={handleInputFocus('decimalPlaces')}
           />
         )}
-        {['switch'].includes(selectedType.slug) && (
+        {['switch', 'bulb'].includes(selectedType.slug) && (
           <>
             <TextInput
               mode="outlined"
               label="Text for value 0"
               maxLength={40}
+              autoCapitalize="characters"
               value={values.boolValue0}
-              onChangeText={handleInputChange('boolValue0')}
+              onChangeText={(text) =>
+                handleInputChange('boolValue0')(text.toUpperCase())
+              }
               onFocus={handleInputFocus('boolValue0')}
             />
             <TextInput
               mode="outlined"
               label="Text for value 1"
               maxLength={40}
+              autoCapitalize="characters"
               value={values.boolValue1}
-              onChangeText={handleInputChange('boolValue1')}
+              onChangeText={(text) =>
+                handleInputChange('boolValue1')(text.toUpperCase())
+              }
               onFocus={handleInputFocus('boolValue1')}
             />
           </>
         )}
+        <DockedFormFooter
+          isDiscardVisible={isNew}
+          isDeleteVisible={!isNew}
+          onSavePress={handleSavePress}
+          onDeletePress={handleDeletePress}
+        />
       </ScrollView>
-      <DockedFormFooter
-        isDiscardVisible={isNew}
-        isDeleteVisible={!isNew}
-        onSavePress={handleSavePress}
-        onDeletePress={handleDeletePress}
-      />
     </ScreenWrapper>
   );
 }

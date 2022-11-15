@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   field: {
     fontFamily: 'Nexa',
     fontSize: 60,
-    textShadowOffset: { width: 1, height: 1 },
+    textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 3,
     textShadowColor: '#090c14',
   },

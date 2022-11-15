@@ -17,7 +17,7 @@ function DefinitionList({ headTitle, data, listItemStyle }) {
             <Text>{item.label}</Text>
             <Text alpha={0.7}>{item.value}</Text>
           </View>
-          <Divider />
+          {index < data.length - 1 && <Divider />}
         </View>
       ))}
     </View>
@@ -25,11 +25,11 @@ function DefinitionList({ headTitle, data, listItemStyle }) {
 }
 
 const styles = StyleSheet.create({
-  divider: {
-    marginVertical: 6,
-  },
   listItem: {
     paddingVertical: 6,
+  },
+  divider: {
+    marginVertical: 6,
   },
 });
 

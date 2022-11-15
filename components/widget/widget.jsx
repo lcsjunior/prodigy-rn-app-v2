@@ -5,6 +5,7 @@ import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { ScaleDecorator } from 'react-native-draggable-flatlist';
 import { Card, IconButton } from 'react-native-paper';
 import { Text } from '../text';
+import { BulbWidget } from './bulb-widget';
 import { DisplayWidget } from './display-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
@@ -14,6 +15,8 @@ function WidgetExt(props) {
       return <TimeSeriesWidget {...props} />;
     case 'display':
       return <DisplayWidget {...props} />;
+    case 'bulb':
+      return <BulbWidget {...props} />;
     default:
       return <Text>Sorry, we are out of {props.type.name}.</Text>;
   }

@@ -2,6 +2,7 @@ import { CommonActions, StackActions } from '@react-navigation/native';
 import { useEffect } from 'react';
 import { Keyboard, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Divider } from 'react-native-paper';
 import {
   DefinitionList,
   DockedFormFooter,
@@ -161,13 +162,14 @@ function ChannelScreen({ navigation, route }) {
             data={channelDetails}
           />
         )}
+        <Divider style={styles.divider} />
+        <DockedFormFooter
+          isDiscardVisible={isNew}
+          isDeleteVisible={!isNew}
+          onSavePress={handleSavePress}
+          onDeletePress={handleDeletePress}
+        />
       </ScrollView>
-      <DockedFormFooter
-        isDiscardVisible={isNew}
-        isDeleteVisible={!isNew}
-        onSavePress={handleSavePress}
-        onDeletePress={handleDeletePress}
-      />
     </ScreenWrapper>
   );
 }
@@ -176,6 +178,9 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingVertical: 12,
     paddingHorizontal: 5,
+  },
+  divider: {
+    marginVertical: 12,
   },
 });
 

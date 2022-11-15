@@ -101,7 +101,7 @@ function TimeSeriesWidget({
         ))}
       </VictoryChart>
       <View style={styles.bbar}>
-        <Text fontSize={11} style={styles.showing}>
+        <Text fontSize={11} style={styles.detailing}>
           {
             // prettier-ignore
             `Showing: ${channel?.feeds?.length}  -  Last: ${value}`
@@ -139,10 +139,10 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   },
-  showing: {
+  detailing: {
     padding: 2,
     color: 'white',
-    textShadowOffset: { width: 1, height: 1 },
+    textShadowOffset: { width: 0.5, height: 0.5 },
     textShadowRadius: 3,
     textShadowColor: '#090c14',
   },
