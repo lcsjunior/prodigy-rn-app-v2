@@ -8,7 +8,7 @@ import { Text } from '../../components';
 import { messages } from '../../utils';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-function ChannelItem({ _id, channelId, data, drag }) {
+function ChannelItem({ _id, displayName, channelId, data, drag }) {
   const navigation = useNavigation();
   const { colors } = useTheme();
   return (
@@ -25,7 +25,7 @@ function ChannelItem({ _id, channelId, data, drag }) {
           <Card.Content>
             <View style={styles.titleWrapper}>
               {data ? (
-                <Text fontSize={16}>{data?.name}</Text>
+                <Text fontSize={16}>{displayName || data?.name}</Text>
               ) : (
                 <>
                   <Ionicons

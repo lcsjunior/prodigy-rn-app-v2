@@ -19,7 +19,7 @@ function DashboardScreen({ navigation, route }) {
   const { isLoading, channel, widgets, widgetTypes, bulkUpdate } = useDashboard(
     route.params?.id
   );
-  const title = channel?.data?.name || '';
+  const title = channel?.displayName || channel?.data?.name || '';
 
   const handleDragEnd = ({ data }) => bulkUpdate(data);
 

@@ -33,6 +33,7 @@ function ChannelScreen({ navigation, route }) {
     channelId: channel?.channelId,
     readApiKey: channel?.readApiKey,
     writeApiKey: channel?.writeApiKey,
+    displayName: channel?.displayName,
   });
 
   useEffect(() => {
@@ -155,6 +156,14 @@ function ChannelScreen({ navigation, route }) {
           onChangeText={handleInputChange('writeApiKey')}
           onFocus={handleInputFocus('writeApiKey')}
           error={errors.writeApiKey}
+        />
+        <TextInput
+          mode="outlined"
+          label="Display name"
+          maxLength={40}
+          value={values.displayName}
+          onChangeText={handleInputChange('displayName')}
+          onFocus={handleInputFocus('displayName')}
         />
         {channel?.data && (
           <DefinitionList
