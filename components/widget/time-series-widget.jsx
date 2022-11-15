@@ -114,6 +114,12 @@ function TimeSeriesWidget({
 }
 
 const styles = StyleSheet.create({
+  absoluteFill: {
+    zIndex: 999,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  },
   axisLabel: {
     fill: '#b3bccd',
     fontSize: 8,
@@ -126,12 +132,6 @@ const styles = StyleSheet.create({
     stroke: '#b3bccd',
     opacity: 0.12,
     strokeWidth: 0.5,
-  },
-  absoluteFill: {
-    zIndex: 999,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
   },
   bbar: {
     position: 'absolute',

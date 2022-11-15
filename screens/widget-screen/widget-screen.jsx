@@ -170,7 +170,7 @@ function WidgetScreen({ navigation, route }) {
             onFocus={handleInputFocus('decimalPlaces')}
           />
         )}
-        {['switch', 'bulb'].includes(selectedType.slug) && (
+        {['bulb'].includes(selectedType.slug) && (
           <>
             <TextInput
               mode="outlined"

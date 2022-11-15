@@ -42,6 +42,7 @@
     "react-native-screens": "~3.18.0",
     "react-native-sse": "^1.1.0",
     "react-native-svg": "13.4.0",
+    "react-native-switch-toggles": "^1.0.1",
     "react-timer-hook": "^3.0.5",
     "sleep-promise": "^9.1.0",
     "use-deep-compare-effect": "^1.8.1",

@@ -7,6 +7,7 @@ import { Card, IconButton } from 'react-native-paper';
 import { Text } from '../text';
 import { BulbWidget } from './bulb-widget';
 import { DisplayWidget } from './display-widget';
+import { SwitchWidget } from './switch-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
 function WidgetExt(props) {
@@ -17,6 +18,8 @@ function WidgetExt(props) {
       return <DisplayWidget {...props} />;
     case 'bulb':
       return <BulbWidget {...props} />;
+    case 'switch':
+      return <SwitchWidget {...props} />;
     default:
       return <Text>Sorry, we are out of {props.type.name}.</Text>;
   }
