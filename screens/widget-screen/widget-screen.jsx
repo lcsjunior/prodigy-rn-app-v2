@@ -70,7 +70,7 @@ function WidgetScreen({ navigation, route }) {
           await update(values);
         }
       } catch (err) {
-        console.error(err.message);
+        console.error(err);
       }
       progress.hide();
       navigation.goBack();

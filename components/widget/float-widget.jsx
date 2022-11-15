@@ -1,11 +1,15 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
+import _ from 'lodash';
 import { colord } from 'colord';
+import { roundTo } from 'round-to';
 
 function FloatWidget({ channel, field, decimalPlaces }) {
   const { colors } = useTheme();
   const rawValue = channel?.lastEntry[field.key];
-  const value = rawValue ? rawValue.toFixed(decimalPlaces || 2) : null;
+  const value = _.isNumber(rawValue)
+    ? roundTo(rawValue, decimalPlaces ?? 2)
+    : null;
 
   return (
     <View style={styles.container}>
@@ -14,15 +18,14 @@ function FloatWidget({ channel, field, decimalPlaces }) {
           editable={false}
           textAlign="right"
           keyboardType="numeric"
-          value={value}
+          value={value.toString()}
           onChangeText={(text) => console.log(text)}
           cursorColor={colors.primary}
           read
           style={[
             styles.input,
             {
-              color: colors.text,
-              borderColor: colord(colors.text).darken(0.25).toHex(),
+              borderColor: colord(colors.text).darken(0.4).toHex(),
               backgroundColor: colors.surface,
             },
           ]}
@@ -43,6 +46,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     textAlignVertical: 'center',
     fontFamily: 'Nexa',
+    color: 'white',
     height: 54,
     paddingHorizontal: 8,
     borderWidth: 1,

@@ -11,6 +11,7 @@ import { presetColors } from '../../utils/preset-colors';
 import { useCallback } from 'react';
 import { Text } from '../text';
 // import { subHours } from 'date-fns';
+import { roundTo } from 'round-to';
 
 function TimeSeriesWidget({
   channel,
@@ -19,9 +20,11 @@ function TimeSeriesWidget({
   displayName,
   decimalPlaces,
 }) {
-  const rawValue = channel?.lastEntry[field.key];
-  const value = rawValue ? rawValue.toFixed(decimalPlaces || 1) : null;
   const name = displayName || channel?.data[field.key];
+  const rawValue = channel?.lastEntry[field.key];
+  const value = _.isNumber(rawValue)
+    ? roundTo(rawValue, decimalPlaces ?? 2)
+    : null;
 
   // const zoomDomain = {
   //   x: [

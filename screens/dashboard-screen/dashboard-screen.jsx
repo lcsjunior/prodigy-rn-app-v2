@@ -146,8 +146,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   itemContainer: {
-    padding: 10,
-    marginVertical: 2,
+    padding: 12,
+    marginVertical: 3,
     marginHorizontal: 6,
     flexDirection: 'row',
     alignItems: 'center',

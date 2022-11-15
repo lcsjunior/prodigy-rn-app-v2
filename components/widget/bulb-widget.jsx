@@ -6,11 +6,11 @@ function BulbWidget({ channel, field, boolValue0, boolValue1 }) {
   const rawValue = channel?.lastEntry[field.key];
   const isOn = rawValue > 0;
   const iconName = isOn ? 'ios-bulb' : 'ios-bulb-outline';
-  const brightness = isOn ? '#ffd700' : '#808080';
+  const brightness = isOn ? '#ffe34b' : '#808080';
 
   return (
     <View style={styles.container}>
-      <Ionicons name={iconName} size={80} color={brightness} />
+      <Ionicons name={iconName} size={70} color={brightness} />
       <View style={styles.bbar}>
         {(boolValue1 || boolValue0) && (
           <Text
