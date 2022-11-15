@@ -35,8 +35,8 @@ function SettingsScreen() {
           left={() => (
             <Avatar.Text style={styles.avatar} size={80} label={initials} />
           )}
-          title={username}
-          description={fullName}
+          title={fullName}
+          description={username}
         />
       </List.Section>
       <Button

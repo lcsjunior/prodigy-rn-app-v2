@@ -12,6 +12,7 @@ import { useCallback } from 'react';
 import { Text } from '../text';
 // import { subHours } from 'date-fns';
 import { roundTo } from 'round-to';
+import { numberHelpers } from '../../utils';
 
 function TimeSeriesWidget({
   channel,
@@ -22,7 +23,7 @@ function TimeSeriesWidget({
 }) {
   const name = displayName || channel?.data[field.key];
   const rawValue = channel?.lastEntry[field.key];
-  const value = _.isNumber(rawValue)
+  const value = numberHelpers.isNumeric(rawValue)
     ? roundTo(rawValue, decimalPlaces ?? 2)
     : null;
 

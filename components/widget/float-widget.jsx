@@ -1,13 +1,13 @@
 import { StyleSheet, TextInput, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import _ from 'lodash';
 import { colord } from 'colord';
 import { roundTo } from 'round-to';
+import { numberHelpers } from '../../utils';
 
 function FloatWidget({ channel, field, decimalPlaces }) {
   const { colors } = useTheme();
   const rawValue = channel?.lastEntry[field.key];
-  const value = _.isNumber(rawValue)
+  const value = numberHelpers.isNumeric(rawValue)
     ? roundTo(rawValue, decimalPlaces ?? 2)
     : null;
 

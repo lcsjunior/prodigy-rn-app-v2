@@ -1,7 +1,8 @@
 import { useFocusEffect } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
+import _ from 'lodash';
 import { baseApi } from '../libs';
-import { messages } from '../utils';
+import { messages, numberHelpers } from '../utils';
 import { readChannel } from './use-channel';
 
 const createWidget = (chId, data) =>
@@ -18,6 +19,13 @@ const deleteWidget = (chId, id) =>
 
 const listWidgetTypes = () => baseApi.get('/widgets/types');
 
+const serializeForm = (data) => ({
+  ...data,
+  decimalPlaces: numberHelpers.isNumeric(data.decimalPlaces)
+    ? _.toNumber(data.decimalPlaces)
+    : null,
+});
+
 const useWidget = (chId, id) => {
   const isNew = !id;
   const [isLoading, setIsLoading] = useState(true);
@@ -26,12 +34,16 @@ const useWidget = (chId, id) => {
   const [widgetTypes, setWidgetTypes] = useState([]);
 
   const create = async (data) => {
-    const { data: newWidget } = await createWidget(chId, data);
+    const { data: newWidget } = await createWidget(chId, serializeForm(data));
     return newWidget;
   };
 
   const update = async (data) => {
-    const { data: currentWidget } = await updateWidget(chId, id, data);
+    const { data: currentWidget } = await updateWidget(
+      chId,
+      id,
+      serializeForm(data)
+    );
     return currentWidget;
   };
 

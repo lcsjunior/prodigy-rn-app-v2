@@ -1,12 +1,11 @@
 import { StyleSheet, View } from 'react-native';
-import _ from 'lodash';
 import { roundTo } from 'round-to';
-
 import { Text } from '../text';
+import { numberHelpers } from '../../utils';
 
 function DisplayWidget({ channel, field, unit, decimalPlaces }) {
   const rawValue = channel?.lastEntry[field.key];
-  const value = _.isNumber(rawValue)
+  const value = numberHelpers.isNumeric(rawValue)
     ? roundTo(rawValue, decimalPlaces ?? 1)
     : null;
 
