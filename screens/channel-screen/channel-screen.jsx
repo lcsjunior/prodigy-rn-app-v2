@@ -37,12 +37,12 @@ function ChannelScreen({ navigation, route }) {
   useEffect(() => {
     navigation.setOptions({
       title: title,
+      headerTitleStyle: {
+        fontFamily: 'Roboto_400Regular',
+        fontSize: 15,
+      },
     });
   }, [navigation, title]);
-
-  if (isLoading) {
-    return <ScreenActivityIndicator />;
-  }
 
   const handleSavePress = async () => {
     Keyboard.dismiss();
@@ -120,6 +120,10 @@ function ChannelScreen({ navigation, route }) {
         },
       ]
     : null;
+
+  if (isLoading) {
+    return <ScreenActivityIndicator />;
+  }
 
   return (
     <ScreenWrapper withScrollView={false}>

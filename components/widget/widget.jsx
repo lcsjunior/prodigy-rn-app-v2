@@ -4,6 +4,7 @@ import { memo } from 'react';
 import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 import { ScaleDecorator } from 'react-native-draggable-flatlist';
 import { Card, IconButton } from 'react-native-paper';
+import { Text } from '../text';
 import { DisplayWidget } from './display-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
@@ -17,7 +18,7 @@ function Widget({ channel, _id, type, drag, ...rest }) {
       case 'display':
         return <DisplayWidget {...props} />;
       default:
-        console.log(`Sorry, we are out of ${type.name}.`);
+        return <Text>Sorry, we are out of {type.name}.</Text>;
     }
   }
 

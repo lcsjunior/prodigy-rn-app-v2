@@ -56,4 +56,4 @@ const useChannel = (id) => {
   };
 };
 
-export { useChannel };
+export { useChannel, readChannel };
