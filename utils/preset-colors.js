@@ -1,12 +1,12 @@
 const presetColors = [
-  '#79c1f6',
-  '#f39468',
-  '#8bd994',
-  '#ef86b4',
-  '#bd85f5',
-  '#5eacbb',
-  '#6173ff',
-  '#e05cc8',
+  '#63b8ff',
+  '#29c3be',
+  '#f2726f',
+  '#ffc533',
+  '#62b58f',
+  '#bc95df',
+  '#67cdf2',
+  '#5d62b5',
 ];
 
 export { presetColors };

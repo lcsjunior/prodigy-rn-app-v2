@@ -46,7 +46,7 @@ function ChannelItem({ _id, channelId, data, drag }) {
               Channel ID: {channelId}
             </Text>
             {data?.description && (
-              <Text fontSize={10} alpha={0.8} numberOfLines={3}>
+              <Text fontSize={12} alpha={0.8} numberOfLines={2}>
                 {data?.description}
               </Text>
             )}

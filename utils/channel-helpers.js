@@ -1,4 +1,14 @@
+const { parseISO } = require('date-fns');
 const _ = require('lodash');
+
+const prepareEntryData = (obj = {}) => {
+  for (const key in obj) {
+    if (key === 'created_at') {
+      obj[key] = parseISO(obj[key]);
+    }
+  }
+  return obj;
+};
 
 const getArrayOfFields = (data) => {
   const mappedFields = [];
@@ -14,6 +24,7 @@ const getArrayOfFields = (data) => {
 };
 
 const channelHelpers = {
+  prepareEntryData,
   getArrayOfFields,
 };
 

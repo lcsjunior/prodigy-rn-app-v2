@@ -7,17 +7,15 @@ function DefinitionList({ headTitle, data, listItemStyle }) {
     <View>
       {headTitle && (
         <View style={styles.listHead}>
-          <Text>{headTitle}</Text>
+          <Text fontSize={15}>{headTitle}</Text>
           <Divider style={styles.divider} />
         </View>
       )}
       {data.map((item, index) => (
         <View key={index}>
           <View style={[styles.listItem, listItemStyle]}>
-            <Text fontSize={12}>{item.label}</Text>
-            <Text fontSize={12} alpha={0.7}>
-              {item.value}
-            </Text>
+            <Text>{item.label}</Text>
+            <Text alpha={0.7}>{item.value}</Text>
           </View>
           <Divider />
         </View>

@@ -36,8 +36,7 @@ function ListEmptyComponent() {
 
 const styles = StyleSheet.create({
   contentContainer: {
-    paddingVertical: 6,
-    paddingHorizontal: 5,
+    paddingBottom: 6,
   },
   listEmptyContainer: {
     flex: 1,

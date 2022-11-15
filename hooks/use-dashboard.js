@@ -4,17 +4,22 @@ import Constants from 'expo-constants';
 import EventSource from 'react-native-sse';
 import { baseApi } from '../libs';
 import { messages } from '../utils';
-import { addSeconds, parseISO } from 'date-fns';
+import { addSeconds } from 'date-fns';
 import _ from 'lodash';
+import { prepareEntryData } from '../utils/channel-helpers';
 
 const readDashboard = (id) => baseApi.get(`/channels/${id}/dashboard`);
 
 const listWidgets = (chId) => baseApi.get('/widgets', { params: { chId } });
 
+const bulkWidgetUpdate = (chId, data) =>
+  baseApi.patch('/widgets/bulk', data, { params: { chId } });
+
 const subscribe = (channel, setChannel) => {
   const chId = channel._id;
-  const lastEntryAt = channel?.lastEntry?.created_at || '';
-  const lastUpdated = lastEntryAt ? addSeconds(parseISO(lastEntryAt), 1) : null;
+  const lastEntry = prepareEntryData(channel?.lastEntry);
+  const lastEntryAt = lastEntry?.created_at || '';
+  const lastUpdated = lastEntryAt ? addSeconds(lastEntryAt, 1) : null;
   const es = new EventSource(
     `${Constants.manifest.extra.baseApiUrl}/channels/${chId}/events?lastEntryAt=${lastUpdated}`
   );
@@ -26,7 +31,7 @@ const subscribe = (channel, setChannel) => {
   });
   es.addEventListener('feed', (event) => {
     console.log('New feed event:', event.data);
-    const data = JSON.parse(event.data);
+    const data = _.castArray(JSON.parse(event.data)).map(prepareEntryData);
     const lastEntry = _.maxBy(data, 'created_at');
     setChannel((currentChannel) => ({
       ...currentChannel,
@@ -44,7 +49,10 @@ const subscribe = (channel, setChannel) => {
   es.addEventListener('close', () => {
     console.log('Close SSE connection.');
   });
-  setChannel(channel);
+  setChannel({
+    ...channel,
+    feeds: channel.feeds.map(prepareEntryData),
+  });
   return es;
 };
 
@@ -80,10 +88,20 @@ const useDashboard = (id) => {
     }, [id])
   );
 
+  const bulkUpdate = (records) => {
+    const data = records.map((record, index) => ({
+      id: record._id,
+      sortOrder: index + 1,
+    }));
+    bulkWidgetUpdate(id, data);
+    setWidgets(records);
+  };
+
   return {
     isLoading,
     channel,
     widgets,
+    bulkUpdate,
   };
 };
 

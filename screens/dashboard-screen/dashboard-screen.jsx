@@ -10,10 +10,12 @@ function DashboardScreen({ navigation, route }) {
     onClose: onMenuClose,
     onToggle: onMenuToggle,
   } = useDisclose();
-  const { isLoading, channel, widgets } = useDashboard(route.params?.id);
+  const { isLoading, channel, widgets, bulkUpdate } = useDashboard(
+    route.params?.id
+  );
   const title = channel?.data?.name || '';
 
-  const handleDragEnd = ({ data }) => console.log(data);
+  const handleDragEnd = ({ data }) => bulkUpdate(data);
 
   useEffect(() => {
     navigation.setOptions({

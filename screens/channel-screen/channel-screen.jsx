@@ -132,7 +132,6 @@ function ChannelScreen({ navigation, route }) {
           onChangeText={handleInputChange('channelId')}
           onFocus={handleInputFocus('channelId')}
           error={errors.channelId}
-          editable={isNew}
         />
         <TextInput
           mode="outlined"

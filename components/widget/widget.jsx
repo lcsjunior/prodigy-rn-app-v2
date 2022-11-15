@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { memo } from 'react';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import { ScaleDecorator } from 'react-native-draggable-flatlist';
 import { Card } from 'react-native-paper';
 import { DisplayWidget } from './display-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
-function Widget({ type, ...rest }) {
+function Widget({ type, drag, ...rest }) {
   function WidgetExt() {
     switch (type.slug) {
       case 'time-series':
@@ -16,16 +18,26 @@ function Widget({ type, ...rest }) {
   }
 
   return (
-    <Card style={styles.gap}>
-      <WidgetExt />
-    </Card>
+    <View style={styles.container}>
+      <ScaleDecorator>
+        <TouchableWithoutFeedback onLongPress={drag}>
+          <Card style={styles.gap}>
+            <WidgetExt />
+          </Card>
+        </TouchableWithoutFeedback>
+      </ScaleDecorator>
+    </View>
   );
 }
+const WrappedWidget = memo(Widget);
 
 const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 6,
+  },
   gap: {
     marginVertical: 2.5,
   },
 });
 
-export { Widget };
+export { WrappedWidget as Widget };
