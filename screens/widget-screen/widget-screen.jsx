@@ -48,6 +48,7 @@ function WidgetScreen({ navigation, route }) {
     unit: widget?.unit,
     boolValue0: widget?.boolValue0,
     boolValue1: widget?.boolValue1,
+    decimalPlaces: widget?.decimalPlaces,
     fields: widget?.fields?.map((field) => ({
       id: field.id,
       color: field.color,
@@ -117,7 +118,7 @@ function WidgetScreen({ navigation, route }) {
         <Divider style={styles.divider} />
         <List.Section title="Choose channel field">
           <View>
-            {['time-series'].includes(selectedType.slug) ? (
+            {['###time-series'].includes(selectedType.slug) ? (
               getArrayOfFields(channel.data).map((field) => (
                 <Checkbox.Item
                   key={field.id}
@@ -156,6 +157,17 @@ function WidgetScreen({ navigation, route }) {
             value={values.unit}
             onChangeText={handleInputChange('unit')}
             onFocus={handleInputFocus('unit')}
+          />
+        )}
+        {['display', 'time-series'].includes(selectedType.slug) && (
+          <TextInput
+            mode="outlined"
+            label="Decimal places"
+            keyboardType="numeric"
+            maxLength={2}
+            value={values.decimalPlaces}
+            onChangeText={handleInputChange('decimalPlaces')}
+            onFocus={handleInputFocus('decimalPlaces')}
           />
         )}
         {['switch'].includes(selectedType.slug) && (

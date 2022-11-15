@@ -43,3 +43,6 @@ web-build/
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
+
+# Trial
+assets/fonts/trial/*

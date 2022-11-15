@@ -14,9 +14,11 @@ import {
 } from '@expo-google-fonts/roboto';
 
 const astroSpace = require('./../assets/fonts/AstroSpace-0Wl3o.otf');
+const nexaRegular = require('./../assets/fonts/trial/Nexa-Trial-Regular.otf');
 
 const fonts = {
   AstroSpace: astroSpace,
+  Nexa: nexaRegular,
   Roboto_100Thin,
   Roboto_100Thin_Italic,
   Roboto_300Light,

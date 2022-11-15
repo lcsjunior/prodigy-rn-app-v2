@@ -38,7 +38,7 @@ function DashboardStatusBar({ channel }) {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 2.5,
+    paddingVertical: 4,
     paddingHorizontal: 6,
   },
   row: {

@@ -8,45 +8,53 @@ import { Text } from '../text';
 import { DisplayWidget } from './display-widget';
 import { TimeSeriesWidget } from './time-series-widget';
 
-function Widget({ channel, _id, type, drag, ...rest }) {
-  const navigation = useNavigation();
-
-  function WidgetExt(props) {
-    switch (type.slug) {
-      case 'time-series':
-        return <TimeSeriesWidget {...props} />;
-      case 'display':
-        return <DisplayWidget {...props} />;
-      default:
-        return <Text>Sorry, we are out of {type.name}.</Text>;
-    }
+function WidgetExt(props) {
+  switch (props.type.slug) {
+    case 'time-series':
+      return <TimeSeriesWidget {...props} />;
+    case 'display':
+      return <DisplayWidget {...props} />;
+    default:
+      return <Text>Sorry, we are out of {props.type.name}.</Text>;
   }
+}
+
+function Widget(props) {
+  const navigation = useNavigation();
+  const field = props.fields[0];
+  const name = props.displayName || props.channel?.data[field.key];
 
   return (
     <ScaleDecorator>
       <View style={styles.container}>
-        <TouchableWithoutFeedback onLongPress={drag}>
+        <TouchableWithoutFeedback onLongPress={props.drag}>
           <Card style={styles.gap}>
-            <WidgetExt channel={channel} {...rest} />
+            <View style={styles.tbar}>
+              <Text
+                fontSize={12}
+                style={styles.name}
+                adjustsFontSizeToFit={true}
+              >
+                {['time-series'].includes(props.type.slug) ? null : name}
+              </Text>
+              <IconButton
+                icon={(rest) => (
+                  <Ionicons name="ios-settings-outline" {...rest} />
+                )}
+                size={14}
+                onPress={() =>
+                  navigation.navigate('WidgetDetail', {
+                    chId: props.channel._id,
+                    typeId: props.type._id,
+                    id: props._id,
+                  })
+                }
+                style={styles.settingsButton}
+              />
+            </View>
+            <WidgetExt {...props} channel={props.channel} field={field} />
           </Card>
         </TouchableWithoutFeedback>
-        <IconButton
-          icon={(props) => <Ionicons name="ios-settings-outline" {...props} />}
-          size={14}
-          onPress={() =>
-            navigation.navigate('WidgetDetail', {
-              chId: channel._id,
-              typeId: type._id,
-              id: _id,
-            })
-          }
-          style={{
-            position: 'absolute',
-            right: 0,
-            margin: 3,
-            marginRight: 1,
-          }}
-        />
       </View>
     </ScaleDecorator>
   );
@@ -55,10 +63,23 @@ const WrappedWidget = memo(Widget);
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 6,
+    marginHorizontal: 8,
   },
   gap: {
-    marginVertical: 2.5,
+    marginVertical: 3,
+  },
+  tbar: {
+    position: 'absolute',
+    width: '100%',
+    zIndex: 9999,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  name: {
+    marginHorizontal: 4,
+  },
+  settingsButton: {
+    margin: 0,
   },
 });
 
