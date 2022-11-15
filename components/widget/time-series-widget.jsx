@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     strokeWidth: 0.5,
   },
   absoluteFill: {
-    zIndex: 9999,
+    zIndex: 999,
     position: 'absolute',
     width: '100%',
     height: '100%',

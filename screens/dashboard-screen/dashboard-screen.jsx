@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { StyleSheet, View } from 'react-native';
 import { IconButton, Menu } from 'react-native-paper';
 import { ScreenActivityIndicator, ScreenWrapper } from '../../components';
 import { useDashboard, useDisclose } from '../../hooks';
@@ -20,33 +21,54 @@ function DashboardScreen({ navigation, route }) {
   useEffect(() => {
     navigation.setOptions({
       title: title,
+      headerTitleStyle: {
+        fontFamily: 'Roboto_400Regular',
+        fontSize: 15,
+      },
       headerRight: () => {
         return (
-          <Menu
-            visible={isMenuOpen}
-            onDismiss={onMenuClose}
-            anchor={
+          channel?._id && (
+            <View style={styles.headerRight}>
               <IconButton
-                icon={global.MORE_ICON}
+                icon="plus"
                 size={24}
-                onPress={onMenuToggle}
+                onPress={() => console.log('Pressed')}
               />
-            }
-          >
-            <Menu.Item
-              title="Channel Settings"
-              onPress={() => {
-                navigation.navigate('ChannelDetail', {
-                  id: route.params?.id,
-                });
-                onMenuClose();
-              }}
-            />
-          </Menu>
+              <Menu
+                visible={isMenuOpen}
+                onDismiss={onMenuClose}
+                anchor={
+                  <IconButton
+                    icon={global.MORE_ICON}
+                    size={24}
+                    onPress={onMenuToggle}
+                  />
+                }
+              >
+                <Menu.Item
+                  title="Channel Settings"
+                  onPress={() => {
+                    navigation.navigate('ChannelDetail', {
+                      id: route.params?.id,
+                    });
+                    onMenuClose();
+                  }}
+                />
+              </Menu>
+            </View>
+          )
         );
       },
     });
-  }, [navigation, route, isMenuOpen, onMenuClose, onMenuToggle, title]);
+  }, [
+    navigation,
+    route,
+    isMenuOpen,
+    onMenuClose,
+    onMenuToggle,
+    title,
+    channel?._id,
+  ]);
 
   if (isLoading) {
     return <ScreenActivityIndicator />;
@@ -62,5 +84,11 @@ function DashboardScreen({ navigation, route }) {
     </ScreenWrapper>
   );
 }
+
+const styles = StyleSheet.create({
+  headerRight: {
+    flexDirection: 'row',
+  },
+});
 
 export { DashboardScreen };

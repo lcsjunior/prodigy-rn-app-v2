@@ -19,7 +19,8 @@ function RootNavigator() {
     <Stack.Navigator
       screenOptions={{
         headerTitleStyle: {
-          fontFamily: 'Roboto_400Regular',
+          fontFamily: 'Roboto_500Medium',
+          fontSize: 17,
         },
       }}
     >
