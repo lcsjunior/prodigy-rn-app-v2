@@ -8,7 +8,7 @@ import { useFastForm, useGlobal, useWidget } from '../../hooks';
 import _ from 'lodash';
 import { useEffect } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { Divider, List, RadioButton } from 'react-native-paper';
+import { Checkbox, Divider, List, RadioButton } from 'react-native-paper';
 import { getArrayOfFields } from '../../utils/channel-helpers';
 
 function WidgetScreen({ navigation, route }) {
@@ -36,20 +36,24 @@ function WidgetScreen({ navigation, route }) {
     });
   }, [navigation, title]);
 
-  const { values, setValue, handleInputChange, handleInputFocus } = useFastForm(
-    {
-      type: route.params?.typeId,
-      displayName: widget?.displayName,
-      unit: widget?.unit,
-      boolValue0: widget?.boolValue0,
-      boolValue1: widget?.boolValue1,
-      fields: widget?.fields?.map((field) => ({
-        id: field.id,
-        color: field.color,
-        decimalPlaces: field.decimalPlaces,
-      })),
-    }
-  );
+  const {
+    values,
+    setValue,
+    handleInputChange,
+    handleInputFocus,
+    arrayHelpers,
+  } = useFastForm({
+    type: route.params?.typeId,
+    displayName: widget?.displayName,
+    unit: widget?.unit,
+    boolValue0: widget?.boolValue0,
+    boolValue1: widget?.boolValue1,
+    fields: widget?.fields?.map((field) => ({
+      id: field.id,
+      color: field.color,
+      decimalPlaces: field.decimalPlaces,
+    })),
+  });
 
   const handleSavePress = async () => {
     if (values.fields.length === 0) {
@@ -83,6 +87,15 @@ function WidgetScreen({ navigation, route }) {
     setValue(`fields.0.id`, id);
   };
 
+  const handleMultiFieldChange = (id) => {
+    const fieldIdx = _.findIndex(values.fields, { id });
+    if (fieldIdx === -1) {
+      arrayHelpers.push('fields', { id });
+    } else {
+      arrayHelpers.remove('fields', fieldIdx);
+    }
+  };
+
   if (isLoading) {
     return <ScreenActivityIndicator />;
   }
@@ -104,18 +117,34 @@ function WidgetScreen({ navigation, route }) {
         <Divider style={styles.divider} />
         <List.Section title="Choose channel field">
           <View>
-            <RadioButton.Group
-              onValueChange={handleFieldChange}
-              value={values.fields[0]?.id}
-            >
-              {getArrayOfFields(channel.data).map((field) => (
-                <RadioButton.Item
+            {['time-series'].includes(selectedType.slug) ? (
+              getArrayOfFields(channel.data).map((field) => (
+                <Checkbox.Item
                   key={field.id}
                   label={`${field.id} - ${field.value}`}
                   value={field.id.toString()}
+                  status={
+                    _.find(values.fields, { id: field.id.toString() })
+                      ? 'checked'
+                      : 'unchecked'
+                  }
+                  onPress={() => handleMultiFieldChange(field.id.toString())}
                 />
-              ))}
-            </RadioButton.Group>
+              ))
+            ) : (
+              <RadioButton.Group
+                onValueChange={handleFieldChange}
+                value={values.fields[0]?.id}
+              >
+                {getArrayOfFields(channel.data).map((field) => (
+                  <RadioButton.Item
+                    key={field.id}
+                    label={`${field.id} - ${field.value}`}
+                    value={field.id.toString()}
+                  />
+                ))}
+              </RadioButton.Group>
+            )}
           </View>
         </List.Section>
         <Divider style={styles.divider} />

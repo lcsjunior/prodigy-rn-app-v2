@@ -71,6 +71,7 @@ function TimeSeriesWidget({ channel, fields }) {
               },
             }}
             data={getData(field.key)}
+            standalone={false}
           />
         ))}
       </VictoryChart>
