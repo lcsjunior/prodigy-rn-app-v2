@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     width: '100%',
-    maxWidth: 340,
+    maxWidth: 360,
     justifyContent: 'center',
     alignSelf: 'center',
   },
