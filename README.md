@@ -15,4 +15,4 @@ Este projeto consiste em um App para integração e visualização IoT para a pl
 
 ### Vídeo da apresentação do projeto final
 
-[![Prodigy IoT](https://img.youtube.com/vi/uehBSYlckWQ/0.jpg)](https://www.youtube.com/watch?v=uehBSYlckWQ)
+[![Prodigy IoT](https://img.youtube.com/vi/uehBSYlckWQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=uehBSYlckWQ)
